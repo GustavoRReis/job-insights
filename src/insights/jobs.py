@@ -7,7 +7,7 @@ import csv
 def read(path: str) -> List[Dict]:
     try:
         result = []
-        with open(path, 'r') as file:
+        with open(path, "r") as file:
             result = list(csv.DictReader(file))
     except FileNotFoundError:
         print("File not found")
@@ -18,7 +18,7 @@ def get_unique_job_types(path: str) -> List[str]:
     data = read(path)
     conjunto = set()
     for index in data:
-        result = index['job_type']
+        result = index["job_type"]
         conjunto.add(result)
     return conjunto
 
@@ -39,3 +39,8 @@ def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
         List of jobs with provided job_type
     """
     raise NotImplementedError
+
+
+if __name__ == "__main__":
+    data_read = read('data/jobs.csv')
+    data_get_unique_job_types = get_unique_job_types('data/jobs.csv')
