@@ -5,28 +5,22 @@ import csv
 
 @lru_cache
 def read(path: str) -> List[Dict]:
-    result = []
-    with open(path, 'r') as file:
-        result = list(csv.DictReader(file))
+    try:
+        result = []
+        with open(path, 'r') as file:
+            result = list(csv.DictReader(file))
+    except FileNotFoundError:
+        print("File not found")
     return result
 
 
 def get_unique_job_types(path: str) -> List[str]:
-    """Checks all different job types and returns a list of them
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    list
-        List of unique job types
-    """
-    raise NotImplementedError
+    data = read(path)
+    conjunto = set()
+    for index in data:
+        result = index['job_type']
+        conjunto.add(result)
+    return conjunto
 
 
 def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
