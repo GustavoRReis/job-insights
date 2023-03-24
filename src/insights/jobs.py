@@ -24,23 +24,16 @@ def get_unique_job_types(path: str) -> List[str]:
 
 
 def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
-    """Filters a list of jobs by job_type
-
-    Parameters
-    ----------
-    jobs : list
-        List of jobs to be filtered
-    job_type : str
-        Job type for the list filter
-
-    Returns
-    -------
-    list
-        List of jobs with provided job_type
-    """
-    raise NotImplementedError
+    data = jobs
+    result = []
+    for index in data:
+        if index["job_type"] == job_type:
+            result.append(index)
+    return result
 
 
 if __name__ == "__main__":
-    data_read = read('data/jobs.csv')
-    data_get_unique_job_types = get_unique_job_types('data/jobs.csv')
+    data_read = read("data/jobs.csv")
+    data_get_unique_job_types = get_unique_job_types("data/jobs.csv")
+    print(filter_by_job_type(data_read, 'OTHER'))
+    print(data_get_unique_job_types)
