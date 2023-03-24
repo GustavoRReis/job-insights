@@ -1,1 +1,0 @@
-print(filter_by_job_type(data_read, "job_type"))
